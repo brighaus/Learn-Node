@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
   res.send('Hey! It works!');
 });
 
+router.get('/puggz', (req, res) => {
+ res.render('pugly');
+});
+
 module.exports = router;
