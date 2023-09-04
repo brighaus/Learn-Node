@@ -7,7 +7,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/puggz', (req, res) => {
- res.render('pugly');
+ res.render('pugly', {
+  food: 'toast',
+  drink: req.query.drink || 'milk',
+ });
 });
 
 module.exports = router;
