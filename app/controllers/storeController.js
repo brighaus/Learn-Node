@@ -12,9 +12,15 @@ exports.addStore = (req, res) => {
 };
 
 exports.createStore = async (req, res) => {
-  // res.json(req.body);
-  const store = new Store(req.body);
-  await store.save(); 
-  console.log(`store: ${req.body.name} saved`);
-  res.redirect('/');
+  const store = await (new Store(req.body)).save();
+  req.flash('success', `Succesfully created ${store.name}. Please send money!`);
+  res.redirect(`/store/${store.slug}`);
 };
+
+exports.getStores = async (req, res) =>{
+  const stores = await Store.find();
+  res.render('stores', {
+    title: 'Stores',
+    stores,
+  });
+}
