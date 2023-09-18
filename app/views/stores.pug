@@ -1,7 +1,10 @@
 extends layout
+
+include mixins/_storeCard
+
 block content
   .inner
     h1 Here're dem stores!
     section.stores
       each store of stores
-        h2= store.name
+        +storeCard(store)
