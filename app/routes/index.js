@@ -8,6 +8,11 @@ router.get('/stores', catchErrors(storeController.getStores));
 
 router.get('/add', storeController.addStore);
 router.post('/add', catchErrors(storeController.createStore));
+router.post('/add/:id', catchErrors(storeController.updateStore));
+
+// get /edit storeController.editStore
+router.get('/stores/:id/edit', catchErrors(storeController.editStore))
+// post /edit storeController.updateStore
 
 router.get('/puggz', (req, res) => {
  res.render('pugly', {
