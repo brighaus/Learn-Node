@@ -19,10 +19,13 @@ exports.createStore = async (req, res) => {
 
 exports.updateStore = async (req, res) => {
   // find store
-  const store = await Store.findOne({ _id: req.params.id })
-  res.json(store);
-  // update
-  // send to store page w. success message
+  const store = await Store.findOneAndUpdate({ _id: req.params.id}, req.body, {
+    new: true, // return the updated version of the store
+    runValidators: true,
+  }).exec();
+
+  req.flash('success', `Successfully updated <b>${store.name}</b>. <a href="/stores/${store.slug}">Go to store</a>`);
+  res.redirect(`/stores/${store._id}/edit`);
   // req.flash('success', `Succesfully updated ${store.name}. Please send weed!`);
   // res.redirect(`/store/${store.slug}`);
 };
